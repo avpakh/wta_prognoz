@@ -14,8 +14,7 @@ class Players(models.Model):
         (RIGHT, 'Right'),
         (UNIVERSAL, 'Universal'),
     ]
-
-    player_id =  models.IntegerField('id_player',blank=True,null=True,unique=True,primary_key=False)
+    player_id =  models.IntegerField('id_player',blank=True,null=True,unique=True,primary_key=True)
     first_name = models.CharField('First name',max_length=100,blank=True,null=True)
     last_name = models.CharField('Last name', max_length=100, blank=True, null=True)
     hand = models.CharField('Hand',max_length=1, choices=WORKING_HAND, default=UNIVERSAL)
@@ -73,6 +72,8 @@ class Rankings(models.Model):
 
 class Matches(models.Model):
     id_match = models.AutoField(primary_key=True)
+    id_match1 = models.AutoField(primary_key=True)
+
     
 
     
