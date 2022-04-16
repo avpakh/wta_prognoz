@@ -14,8 +14,7 @@ class Players(models.Model):
         (RIGHT, 'Right'),
         (UNIVERSAL, 'Universal'),
     ]
-
-    player_id =  models.IntegerField('id_player',blank=True,null=True,unique=True,primary_key=False)
+    player_id =  models.IntegerField('id_player',blank=True,null=True,unique=True,primary_key=True)
     first_name = models.CharField('First name',max_length=100,blank=True,null=True)
     last_name = models.CharField('Last name', max_length=100, blank=True, null=True)
     hand = models.CharField('Hand',max_length=1, choices=WORKING_HAND, default=UNIVERSAL)
@@ -63,7 +62,47 @@ class Rankings(models.Model):
 
 
 
-#tourney_id,tourney_name,surface,draw_size,tourney_level,tourney_date,match_num,\
+
+
+
+class Tours(models.Model):
+
+    G = 'G'
+    I = 'I'
+    P = 'P'
+    D = 'D'
+    F = 'F'
+    PM = 'PM'
+
+    LEVEL = [
+        (G, 'G'),
+        (I, 'I'),
+        (P, 'P'),
+        (D, 'D'),
+        (F, 'F'),
+        (PM, 'PM'),
+    ]
+
+    Hard = 'Hard'
+    Clay = 'Clay'
+    Grass = 'Grass'
+
+    SURFACE = [
+        (Hard, 'Hard'),
+        (Clay, 'Clay'),
+        (Grass, 'Grass'),
+    ]
+
+
+    id_tour = models.AutoField(primary_key=True)
+    tourney_id = models.CharField('Tour_id',max_length=50,blank=True,null=True)
+    tourney_name = models.CharField('Tourney_name', max_length=100, blank=True, null=True)
+    draw_size =  models.IntegerField('Draw_size',null=True,blank=True)
+    tourney_level = models.CharField('Torney_level', max_length=2, choices=LEVEL, default=G)
+    surface = models.CharField('Surface', max_length=10, choices=SURFACE, default=G)
+
+
+#match_num,\
 #winner_id,winner_seed,winner_entry,winner_name,winner_hand,winner_ht,winner_ioc,\
 #winner_age,loser_id,loser_seed,loser_entry,loser_name,loser_hand,loser_ht,loser_ioc,\
 #loser_age,score,best_of,round,minutes,w_ace,w_df,w_svpt,w_1stIn,w_1stWon,w_2ndWon,w_SvGms,\
@@ -71,8 +110,17 @@ class Rankings(models.Model):
 #winner_rank,winner_rank_points,loser_rank,loser_rank_points
 
 
+
 class Matches(models.Model):
     id_match = models.AutoField(primary_key=True)
+    match_num = models.IntegerField('Match Num',null=True,blank=True)
+    tourney = models.ForeignKey(Tours, blank=True, null=True, on_delete=models.PROTECT)
+    winner = models.ForeignKey(Players,blank=True,null=True,on_delete=models.PROTECT)
+    winner_seed = models.IntegerField('Winner_seed',null=True,blank=True)
+    winner_entry = models.IntegerField('Winner_entry', null=True, blank=True)
+
+
+
     
 
     
