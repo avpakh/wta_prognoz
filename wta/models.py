@@ -118,10 +118,4 @@ class Matches(models.Model):
     winner = models.ForeignKey(Players,blank=True,null=True,on_delete=models.PROTECT)
     winner_seed = models.IntegerField('Winner_seed',null=True,blank=True)
     winner_entry = models.IntegerField('Winner_entry', null=True, blank=True)
-
-
-
     
-
-    
-
