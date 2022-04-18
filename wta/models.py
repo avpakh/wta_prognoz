@@ -60,11 +60,6 @@ class Rankings(models.Model):
         rank = Rankings.objects.get(player=_player,ranking_date=_date)
         return rank
 
-
-
-
-
-
 class Tours(models.Model):
 
     G = 'G'
@@ -93,13 +88,13 @@ class Tours(models.Model):
         (Grass, 'Grass'),
     ]
 
-
     id_tour = models.AutoField(primary_key=True)
-    tourney_id = models.CharField('Tour_id',max_length=50,blank=True,null=True)
+    tourney_id = models.CharField('Tour_id', max_length=50, blank=True, null=True)
     tourney_name = models.CharField('Tourney_name', max_length=100, blank=True, null=True)
-    draw_size =  models.IntegerField('Draw_size',null=True,blank=True)
-    tourney_level = models.CharField('Torney_level', max_length=2, choices=LEVEL, default=G)
-    surface = models.CharField('Surface', max_length=10, choices=SURFACE, default=G)
+    draw_size = models.IntegerField('Draw_size', null=True, blank=True)
+    tourney_level = models.CharField('Tourney_level', max_length=2, choices=LEVEL, default=G)
+    surface = models.CharField('Surface', max_length=10, choices=SURFACE, default=Hard)
+    tourney_date = models.DateField('Tourney_date', blank=True, null=True)
 
 
 #match_num,\
@@ -110,12 +105,58 @@ class Tours(models.Model):
 #winner_rank,winner_rank_points,loser_rank,loser_rank_points
 
 
-
 class Matches(models.Model):
+    F = 'F'
+    QF = 'QF'
+    R128 = 'R128'
+    R64 = 'R64'
+    R32 = 'R32'
+    R16 = 'R16'
+    RR = 'RR'
+    SF = 'SF'
+
+    ROUND = [
+        (F, 'Final'),
+        (QF, 'QF'),
+        (R128, 'R128'),
+        (R64, 'R64'),
+        (R32, 'R32'),
+        (R16, 'R16'),
+        (RR, 'RR'),
+        (SF, 'SF'),
+
+    ]
+
+    ALT = 'Alt'
+    Q = 'Q'
+    LL = 'LL'
+    SE = 'SE'
+    WC = 'WC'
+
+    ENTRY = [
+        (ALT, 'Alt'),
+        (Q, 'Q'),
+        (LL, 'LL'),
+        (SE, 'SE'),
+        (WC, 'WC'),
+    ]
+
     id_match = models.AutoField(primary_key=True)
-    match_num = models.IntegerField('Match Num',null=True,blank=True)
+    match_num = models.IntegerField('Match Num', null=True, blank=True)
     tourney = models.ForeignKey(Tours, blank=True, null=True, on_delete=models.PROTECT)
-    winner = models.ForeignKey(Players,blank=True,null=True,on_delete=models.PROTECT)
-    winner_seed = models.IntegerField('Winner_seed',null=True,blank=True)
-    winner_entry = models.IntegerField('Winner_entry', null=True, blank=True)
+    winner = models.ForeignKey(Players, blank=True, null=True, on_delete=models.PROTECT)
+    winner_seed = models.IntegerField('Winner_seed', null=True, blank=True)
+    winner_entry = models.CharField('Winner_entry', max_length=10, choices=ENTRY, default=WC)
+    winner_age = models.FloatField('Winner_age', null=True, blank=True)
+    loser = models.ForeignKey(Players, blank=True, null=True, on_delete=models.PROTECT)
+    loser_seed = models.IntegerField('Loser_seed', null=True, blank=True)
+    loser_entry = models.CharField('Loser_entry', max_length=10, choices=ENTRY, default=WC)
+    loser_age = models.FloatField('Loser_age', null=True, blank=True)
+    match_date = models.DateField('Match_date', blank=True, null=True)  # calculated by match num and drawsize
+    round = models.CharField('Round', max_length=10, choices=ROUND, default=R128)
+    minutes = models.IntegerField('Match_duration', null=True, blank=True)
+    winner_rank = models.IntegerField('Winner_rank', null=True, blank=True)
+    winner_rank_points = models.IntegerField('Winner_rank_points', null=True, blank=True)
+    loser_rank = models.IntegerField('Winner_rank', null=True, blank=True)
+    loser_rank_points = models.IntegerField('Winner_rank_points', null=True, blank=True)
     
