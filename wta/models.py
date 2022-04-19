@@ -14,8 +14,8 @@ class Players(models.Model):
         (RIGHT, 'Right'),
         (UNIVERSAL, 'Universal'),
     ]
-    player_id =  models.IntegerField('id_player',blank=True,null=True,unique=True,primary_key=True)
-    first_name = models.CharField('First name',max_length=100,blank=True,null=True)
+    player_id = models.IntegerField('id_player', blank=True, null=True, unique=True, primary_key=False)
+    first_name = models.CharField('First name', max_length=100, blank=True, null=True)
     last_name = models.CharField('Last name', max_length=100, blank=True, null=True)
     hand = models.CharField('Hand',max_length=1, choices=WORKING_HAND, default=UNIVERSAL)
     dob = models.DateField('Date of birthday',blank=True,null=True)
@@ -144,11 +144,11 @@ class Matches(models.Model):
     id_match = models.AutoField(primary_key=True)
     match_num = models.IntegerField('Match Num', null=True, blank=True)
     tourney = models.ForeignKey(Tours, blank=True, null=True, on_delete=models.PROTECT)
-    winner = models.ForeignKey(Players, blank=True, null=True, on_delete=models.PROTECT)
+    winner = models.ForeignKey(Players, blank=True, null=True, on_delete=models.PROTECT, related_name='winner')
     winner_seed = models.IntegerField('Winner_seed', null=True, blank=True)
     winner_entry = models.CharField('Winner_entry', max_length=10, choices=ENTRY, default=WC)
     winner_age = models.FloatField('Winner_age', null=True, blank=True)
-    loser = models.ForeignKey(Players, blank=True, null=True, on_delete=models.PROTECT)
+    loser = models.ForeignKey(Players, blank=True, null=True, on_delete=models.PROTECT, related_name='loser')
     loser_seed = models.IntegerField('Loser_seed', null=True, blank=True)
     loser_entry = models.CharField('Loser_entry', max_length=10, choices=ENTRY, default=WC)
     loser_age = models.FloatField('Loser_age', null=True, blank=True)

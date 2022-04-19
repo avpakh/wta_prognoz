@@ -1,0 +1,16 @@
+.ba-box-autocomplete .list-group {
+    padding: 5px;
+    height: 200px;
+    overflow-y: scroll;
+    border: 2px dashed #cccccc;
+}
+
+.ba-box-autocomplete .list-group-item {
+    line-height: 20px;
+    height: 20px;
+    padding: 2px 10px;
+}
+
+.ba-box-autocomplete .list-group-item .ba-name {
+    margin: 0 10px;
+}
