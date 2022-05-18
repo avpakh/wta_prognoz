@@ -7,6 +7,6 @@ from wta import views
 urlpatterns = [
 
     # The home page
-    path('', views.update_db, name='update_db'),
+    path('', views.start_page, name='start_page'),
 
 ]
