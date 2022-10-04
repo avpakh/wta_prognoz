@@ -39,6 +39,9 @@ https://github.com/avpakh/wta_prognoz/blob/master/%22%D0%9F%D1%80%D0%B5%D0%B4%D1
 4. Разработан bot-telegram (WTAprognozbot) для прогнозирирования результатов игр 
 https://github.com/avpakh/wta_prognoz/tree/master/bot
 
+Тестовые примеры результатов бота: https://github.com/avpakh/wta_prognoz/blob/master/bot/Test_data.docx
+
+
 
 
 
